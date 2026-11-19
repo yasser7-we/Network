@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شبكات ببساطة | أساسيات شبكات الحاسوب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #2457d6;
+  --primary-dark: #163eaa;
+  --dark-bg: #0f172a;
+  --light-bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --success: #10b981;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cairo', Tahoma, sans-serif;
+  background: var(--light-bg);
+  color: var(--text-main);
+  line-height: 1.8;
+}
+
+/* Header & Navigation */
+header {
+  background: var(--dark-bg);
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+nav {
+  background: rgba(36, 87, 214, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 10px 15px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 4px 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  transition: background 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2457d6 100%);
+  color: white;
+  padding: 65px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin: 0 0 12px;
+  font-weight: 800;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 650px;
+  margin: 0 auto 25px;
+  color: #e2e8f0;
+}
+
+.hero-btn {
+  display: inline-block;
+  background: #ffffff;
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Layout & Sections */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+section {
+  padding-top: 25px;
+  margin-bottom: 35px;
+}
+
+h2 {
+  color: var(--dark-bg);
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding-right: 14px;
+  border-right: 5px solid var(--primary);
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+  color: var(--primary-dark);
+  margin-top: 0;
+  font-size: 19px;
+}
+
+/* Cards & Grid */
+.card {
+  background: var(--card-bg);
+  padding: 24px;
+  margin: 15px 0;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.grid .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -5px rgba(36, 87, 214, 0.12);
+  border-color: #bfdbfe;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.grid .card {
+  margin: 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.code-box {
+  background: #f8fafc;
+  border: 1px dashed #94a3b8;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary);
+  display: inline-block;
+  direction: ltr;
+  margin: 8px 0;
+}
+
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+td, th {
+  padding: 12px 16px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background: #f1f5f9;
+  color: var(--dark-bg);
+  font-weight: 700;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: #f8fafc;
+}
+
+/* Calculator Inputs */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+label.field-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+input[type="text"], select {
+  padding: 12px 15px;
+  width: 100%;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s;
+  direction: ltr;
+  text-align: left;
+}
+
+input[type="text"]:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: 0;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button.secondary-btn {
+  background: #e2e8f0;
+  color: var(--text-main);
+  margin-right: 8px;
+}
+
+button.secondary-btn:hover {
+  background: #cbd5e1;
+}
+
+/* Calculator Result Grid */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.res-item {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.res-item span {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.res-item strong {
+  display: block;
+  font-size: 15px;
+  color: var(--dark-bg);
+  font-family: monospace;
+  direction: ltr;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.error-msg {
+  background: #fef2f2;
+  color: var(--danger);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #fecaca;
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+/* Quiz Styling (Fixed Radio Buttons) */
+.quiz-question {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quiz-question:last-of-type {
+  border-bottom: none;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quiz-option:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+.quiz-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.quiz-option.correct {
+  background: #ecfdf5;
+  border-color: var(--success);
+  color: #065f46;
+  font-weight: 700;
+}
+
+.quiz-option.wrong {
+  background: #fef2f2;
+  border-color: var(--danger);
+  color: #991b1b;
+}
+
+#quizResult {
+  margin-top: 18px;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 14px;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Footer */
+footer {
+  background: var(--dark-bg);
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+  margin-top: 50px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+.author-credit {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: inline-block;
+}
+
+@media (max-width: 650px) {
+  .hero h1 { font-size: 28px; }
+  .calc-grid { grid-template-columns: 1fr; }
+  nav a { font-size: 13px; padding: 5px 10px; margin: 3px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>شبكات ببساطة</h1>
+  <p>دليلك التفاعلي لتعلم أساسيات شبكات الحاسوب من الصفر</p>
+</header>
+
+<nav>
+  <a href="#intro">مقدمة</a>
+  <a href="#types">أنواع الشبكات</a>
+  <a href="#devices">الأجهزة</a>
+  <a href="#ip">عناوين IP</a>
+  <a href="#subnet">Subnet Mask</a>
+  <a href="#calculator">حاسبة الشبكات</a>
+  <a href="#other">البروتوكولات</a>
+  <a href="#quiz">الاختبار</a>
+</nav>
+
+<section class="hero">
+  <h1>مرحباً بك في عالم الشبكات</h1>
+  <p>افهم آلية عمل الإنترنت، عناوين IP، وأجهزة الشبكات بأسلوب بصري مبسط مع أدوات تفاعلية</p>
+  <a href="#intro" class="hero-btn">ابدأ التعلم الآن</a>
+</section>
+
+<div class="container">
+
+  <section id="intro">
+    <h2>1. مقدمة في الشبكات</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">مفهوم أساسي</span>
+        <h3>ما هي شبكة الحاسوب؟</h3>
+        <p>
+          شبكة الحاسوب هي مجموعة من الأجهزة المتصلة ببعضها (سلكياً أو لاسلكياً) لتبادل البيانات ومشاركة الموارد مثل الملفات والطابعات والاتصال بالإنترنت.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="badge">الشبكة العالمية</span>
+        <h3>ما هو الإنترنت؟</h3>
+        <p>
+          الإنترنت شبكة عالمية ضخمة تربط ملايين الشبكات المحلية والخاصة والحكومية حول العالم، وتتيح تبادل المعلومات والخدمات في أجزاء من الثانية.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="types">
+    <h2>2. أنواع الشبكات</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">محلية</span>
+        <h3>LAN (Local Area Network)</h3>
+        <p>الشبكة المحلية، وتغطي مساحة جغرافية محدودة وتستخدم في المنازل والمدارس والمكاتب.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">واسعة</span>
+        <h3>WAN (Wide Area Network)</h3>
+        <p>الشبكة الواسعة، وتربط شبكات محلية متباعدة جغرافياً عبر المدن والدول (مثل شبكة الإنترنت).</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">لاسلكية</span>
+        <h3>WLAN (Wireless LAN)</h3>
+        <p>شبكة محلية لاسلكية تعتمد على موجات الراديو وتقنية Wi-Fi لربط الأجهزة دون أسلاك.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="devices">
+    <h2>3. أجهزة الشبكات</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">توجيه</span>
+        <h3>Router - الموجّه</h3>
+        <p>يربط بين الشبكات المختلفة ويوجه حزم البيانات عبر أفضل مسار إلى وجهتها المناسبة.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">ربط داخلي</span>
+        <h3>Switch - المحوّل</h3>
+        <p>يربط عدة أجهزة داخل الشبكة المحلية الواحدة ويوجه البيانات للجهاز المقصود بدقة.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">تغطية Wi-Fi</span>
+        <h3>Access Point</h3>
+        <p>نقطة وصول توفر اتصالاً لاسلكياً للأجهزة للانضمام إلى الشبكة السلكية.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">مُقدّم الخدمة</span>
+        <h3>Server - الخادم</h3>
+        <p>جهاز أو برنامج ذو مواصفات عالية يقدم خدمات وموارد وبيانات للأجهزة الأخرى.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">مُستقبِل الخدمة</span>
+        <h3>Client - العميل</h3>
+        <p>جهاز (حاسوب، هاتف) أو برنامج يطلب خدمة أو بيانات من الخادم.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">تحويل الإشارة</span>
+        <h3>Modem - المودم</h3>
+        <p>يحوّل الإشارات الرقمية إلى تماثلية والعكس بما يتناسب مع خطوط مزود خدمة الإنترنت (ISP).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ip">
+    <h2>4. عنوان IP (IP Address)</h2>
+    <div class="card">
+      <h3>ما هو عنوان IP؟</h3>
+      <p>
+        عنوان IP هو معرّف رقمي منطقي يُستخدم لتعريف واجهة الجهاز على الشبكة وتوجيه البيانات إليه بدقة. يتكون إصدار <b>IPv4</b> من 32 بت، ويُكتب على شكل أربعة أرقام عشرية تفصل بينها نقاط:
+      </p>
+      <div class="code-box">192.168.1.10</div>
+    </div>
+
+    <div class="card">
+      <h3>مصطلحات أساسية في العنونة</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>المصطلح</th><th>المعنى والوظيفة</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Network Address</b></td><td>عنوان الشبكة الأساسي (يُعرّف الشبكة نفسها ولا يُمنح لجهاز)</td></tr>
+            <tr><td><b>First IP</b></td><td>أول عنوان صالح يمكن منحه لجهاز داخل الشبكة</td></tr>
+            <tr><td><b>Last IP</b></td><td>آخر عنوان صالح يمكن منحه لجهاز داخل الشبكة</td></tr>
+            <tr><td><b>Broadcast Address</b></td><td>عنوان البث العام لإرسال رسالة لجميع أجهزة الشبكة دفعة واحدة</td></tr>
+            <tr><td><b>Default Gateway</b></td><td>البوابة الافتراضية (غالباً عنوان الراوتر للخروج إلى الإنترنت)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="subnet">
+    <h2>5. قناع الشبكة (Subnet Mask)</h2>
+    <div class="card">
+      <p>
+        قناع الشبكة يحدد الجزء المخصص للشبكة (Network) والجزء المخصص للأجهزة (Hosts) داخل عنوان IPv4.
+      </p>
+      <div class="code-box">255.255.255.0 &nbsp;=&nbsp; /24</div>
+      <p>
+        الاختصار <b>/24</b> يعني أن أول 24 بت مخصصة لتعريف الشبكة، وتتبقى 8 بتات لتوزيعها على الأجهزة المتصلة.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>مثال تطبيقي محلول: <span style="direction:ltr; display:inline-block; font-family:monospace;">192.168.1.10/24</span></h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>المعلومة</th><th>النتيجة</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>عنوان الشبكة (Network IP)</td><td style="font-family:monospace; direction:ltr;">192.168.1.0</td></tr>
+            <tr><td>قناع الشبكة (Subnet Mask)</td><td style="font-family:monospace; direction:ltr;">255.255.255.0</td></tr>
+            <tr><td>أول عنوان متاح (First IP)</td><td style="font-family:monospace; direction:ltr;">192.168.1.1</td></tr>
+            <tr><td>آخر عنوان متاح (Last IP)</td><td style="font-family:monospace; direction:ltr;">192.168.1.254</td></tr>
+            <tr><td>عنوان البث (Broadcast IP)</td><td style="font-family:monospace; direction:ltr;">192.168.1.255</td></tr>
+            <tr><td>عدد الأجهزة المتاحة (Usable Hosts)</td><td><b>254 جهاز</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator">
+    <h2>6. حاسبة الشبكات التفاعلية (IP Calculator)</h2>
+    <div class="card">
+      <div class="calc-grid">
+        <div>
+          <label class="field-label" for="ipInput">أدخل عنوان IPv4:</label>
+          <input type="text" id="ipInput" value="192.168.1.10" placeholder="مثال: 192.168.1.10">
+        </div>
+        <div>
+          <label class="field-label" for="prefix">اختر البادئة (Prefix):</label>
+          <select id="prefix" onchange="calculate()"></select>
+        </div>
+      </div>
+
+      <button onclick="calculate()">احسب تفاصيل الشبكة</button>
+      <button class="secondary-btn" onclick="copyResult()" id="copyBtn">نسخ النتائج</button>
+
+      <div id="resultContainer"></div>
+    </div>
+  </section>
+
+  <section id="other">
+    <h2>7. بروتوكولات وخدمات الشبكة</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">دليل الأسماء</span>
+        <h3>DNS</h3>
+        <p>نظام أسماء النطاقات؛ يترجم أسماء المواقع (مثل google.com) إلى عناوين IP رقمية.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">توزيع تلقائي</span>
+        <h3>DHCP</h3>
+        <p>بروتوكول يوزع عناوين IP وإعدادات الشبكة تلقائياً على الأجهزة بمجرد اتصالها.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">نقل موثوق</span>
+        <h3>TCP</h3>
+        <p>بروتوكول نقل يضمن وصول البيانات كاملة وبالترتيب الصحيح مع التحقق من الأخطاء.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">نقل سريع</span>
+        <h3>UDP</h3>
+        <p>بروتوكول نقل خفيف وسريع لا ينشئ اتصالاً مسبقاً، مثالي للبث المباشر والألعاب.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">تصفح الويب</span>
+        <h3>HTTP / HTTPS</h3>
+        <p>بروتوكولات نقل صفحات الويب، ويوفر HTTPS تشفيراً لحماية بيانات المستخدمين.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">عنوان فيزيائي</span>
+        <h3>MAC Address</h3>
+        <p>عنوان فريد محفور على بطاقة الشبكة يُستخدم للتعرف على الجهاز داخل الشبكة المحلية.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>8. اختبر معلوماتك</h2>
+    <div class="card">
+
+      <div class="quiz-question" id="q1-box">
+        <p><b>1. ما الوظيفة الأساسية لجهاز الموجّه (Router)؟</b></p>
+        <label class="quiz-option"><input type="radio" name="q1" value="a"> ربط الشبكات المختلفة وتوجيه البيانات بينها</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="b"> تخزين الملفات والنسخ الاحتياطي فقط</label>
+        <label class="quiz-option"><input type="radio" name="q1" value="c"> تبريد مكونات الحاسوب الداخلية</label>
+      </div>
+
+      <div class="quiz-question" id="q2-box">
+        <p><b>2. ما قناع الشبكة (Subnet Mask) الذي يكافئ الاختصار /24؟</b></p>
+        <label class="quiz-option"><input type="radio" name="q2" value="a"> 255.255.255.0</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="b"> 255.0.0.0</label>
+        <label class="quiz-option"><input type="radio" name="q2" value="c"> 255.255.0.0</label>
+      </div>
+
+      <div class="quiz-question" id="q3-box">
+        <p><b>3. ما وظيفة بروتوكول DNS؟</b></p>
+        <label class="quiz-option"><input type="radio" name="q3" value="a"> ترجمة أسماء المواقع إلى عناوين IP</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="b"> تشفير كلمات المرور داخل المتصفح</label>
+        <label class="quiz-option"><input type="radio" name="q3" value="c"> زيادة سرعة كرت الشبكة</label>
+      </div>
+
+      <button onclick="gradeQuiz()">تصحيح الإجابات</button>
+      <button class="secondary-btn" onclick="resetQuiz()">إعادة المحاولة</button>
+
+      <div id="quizResult"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p style="font-weight: 700; font-size: 18px;">شبكات ببساطة</p>
+  <p style="color: #cbd5e1; font-size: 14px;">منصة تعليمية مبسطة لأساسيات شبكات الحاسوب</p>
+  <div class="author-credit">
+    إعداد وتطوير: المهندس ياسر فهد محمد محمد الخولاني
+  </div>
+</footer>
+
+<script>
+const prefix = document.getElementById("prefix");
+let lastResultText = "";
+
+for (let i = 0; i <= 32; i++) {
+  let option = document.createElement("option");
+  option.value = i;
+  option.textContent = "/" + i + (i === 24 ? " (الافتراضي)" : "");
+  if (i === 24) option.selected = true;
+  prefix.appendChild(option);
+}
+
+function ipToInt(ip) {
+  const p = ip.split(".");
+  if (p.length !== 4 || p.some(x => !/^\d+$/.test(x) || Number(x) > 255 || Number(x) < 0))
+    return null;
+  return p.reduce((n, x) => (n * 256 + Number(x)) >>> 0, 0) >>> 0;
+}
+
+function intToIp(n) {
+  return [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join(".");
+}
+
+function calculate() {
+  const ip = document.getElementById("ipInput").value.trim();
+  const bits = Number(prefix.value);
+  const number = ipToInt(ip);
+  const container = document.getElementById("resultContainer");
+
+  if (number === null) {
+    container.innerHTML = `<div class="error-msg">⚠️ عنوان IP المدخل غير صحيح. تأكد من كتابة 4 أرقام بين 0 و 255 مفصولة بنقاط.</div>`;
+    lastResultText = "";
+    return;
+  }
+
+  const mask = bits === 0 ? 0 : (0xffffffff << (32 - bits)) >>> 0;
+  const network = (number & mask) >>> 0;
+  const broadcast = (network | (~mask >>> 0)) >>> 0;
+  const total = Math.pow(2, 32 - bits);
+
+  let first, last, hosts;
+
+  if (bits <= 30) {
+    first = network + 1;
+    last = broadcast - 1;
+    hosts = total - 2;
+  } else if (bits === 31) {
+    first = network;
+    last = broadcast;
+    hosts = 2;
+  } else {
+    first = network;
+    last = network;
+    hosts = 1;
+  }
+
+  const data = [
+    { label: "عنوان الشبكة (Network IP)", val: intToIp(network) },
+    { label: "قناع الشبكة (Subnet Mask)", val: intToIp(mask) },
+    { label: "أول عنوان متاح (First IP)", val: intToIp(first) },
+    { label: "آخر عنوان متاح (Last IP)", val: intToIp(last) },
+    { label: "عنوان البث (Broadcast IP)", val: intToIp(broadcast) },
+    { label: "إجمالي العناوين (Total)", val: total.toLocaleString() },
+    { label: "الأجهزة المتاحة (Usable Hosts)", val: hosts.toLocaleString() }
+  ];
+
+  lastResultText = data.map(d => `${d.label}: ${d.val}`).join("\n");
+
+  container.innerHTML = `<div class="result-grid">` +
+    data.map(item => `
+      <div class="res-item">
+        <span>${item.label}</span>
+        <strong>${item.val}</strong>
+      </div>
+    `).join("") +
+    `</div>`;
+}
+
+function copyResult() {
+  if (!lastResultText) return;
+  navigator.clipboard.writeText(lastResultText).then(() => {
+    const btn = document.getElementById("copyBtn");
+    const oldText = btn.textContent;
+    btn.textContent = "تم النسخ ✓";
+    setTimeout(() => btn.textContent = oldText, 2000);
+  });
+}
+
+function gradeQuiz() {
+  const answers = { q1: "a", q2: "a", q3: "a" };
+  let score = 0;
+
+  for (const q in answers) {
+    const options = document.querySelectorAll(`input[name="${q}"]`);
+    options.forEach(opt => {
+      const parentLabel = opt.parentElement;
+      parentLabel.classList.remove("correct", "wrong");
+
+      if (opt.value === answers[q]) {
+        parentLabel.classList.add("correct");
+      }
+      if (opt.checked) {
+        if (opt.value === answers[q]) {
+          score++;
+        } else {
+          parentLabel.classList.add("wrong");
+        }
+      }
+    });
+  }
+
+  const resBox = document.getElementById("quizResult");
+  resBox.style.display = "block";
+  if (score === 3) {
+    resBox.style.background = "#ecfdf5";
+    resBox.style.color = "#065f46";
+    resBox.textContent = `ممتاز! لقد حصلت على العلامة الكاملة: ${score} من 3 🎉`;
+  } else {
+    resBox.style.background = "#eff6ff";
+    resBox.style.color = "#1e3a8a";
+    resBox.textContent = `نتيجتك: ${score} من 3. راجع الإجابات المحددة بالأخضر أعلاه.`;
+  }
+}
+
+function resetQuiz() {
+  document.querySelectorAll('#quiz input[type="radio"]').forEach(opt => {
+    opt.checked = false;
+    opt.parentElement.classList.remove("correct", "wrong");
+  });
+  const resBox = document.getElementById("quizResult");
+  resBox.style.display = "none";
+}
+
+// تشغيل الحاسبة عند تحميل الصفحة
+calculate();
+</script>
+
+</body>
+</html>
